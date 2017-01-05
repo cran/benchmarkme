@@ -27,7 +27,7 @@ nice_palette = function(){
 #' @importFrom utils data
 #' @importFrom stats aggregate
 #' @importFrom benchmarkmeData select_results is_blas_optimize
-#' @S3method plot ben_results
+#' @export
 #' @examples 
 #' data(sample_results)
 #' plot(sample_results)
@@ -47,7 +47,9 @@ plot.ben_results = function(x,
 }
 
 make_plot = function(x, test_group, byte_optimize, blas_optimize, log, ...){
-  results = select_results(test_group, byte_optimize, blas_optimize)
+  results = select_results(test_group, 
+                           byte_optimize = byte_optimize, 
+                           blas_optimize = blas_optimize)
   
   ## Manipulate new data
   x = x[x$test_group %in% test_group,]

@@ -3,7 +3,7 @@ system_ram = function(os) {
     cmd = "awk '/MemTotal/ {print $2}' /proc/meminfo"
     ram = system(cmd, intern=TRUE)
   } else if(length(grep("^darwin", os))) {
-    (ram = system('system_profiler -detailLevel mini | grep "  Memory:"', intern=TRUE)[1])
+    ram = system('system_profiler -detailLevel mini | grep "  Memory:"', intern=TRUE)[1]
   } else if(length(grep("^solaris", os))) {
     cmd = "prtconf | grep Memory"
     ram = system(cmd, intern=TRUE) ## Memory size: XXX Megabytes
@@ -13,10 +13,9 @@ system_ram = function(os) {
   ram
 }
 
-
 #' Get the amount of RAM
 #' 
-#' Attempt to extract the amount of RAM on the current host. This is OS 
+#' Attempt to extract the amount of RAM on the current machine. This is OS 
 #' specific:
 #' \itemize{
 #' \item Linux: \code{proc/meminfo}
@@ -32,39 +31,36 @@ system_ram = function(os) {
 #' get_ram()
 get_ram = function() {
   os = R.version$os
-  ram = try(system_ram(os), silent=TRUE)
-  if(class(ram) == "try-error") {
+  ram = suppressWarnings(try(system_ram(os), silent = TRUE))
+  if(class(ram) == "try-error" || length(ram) == 0) {
     message("\t Unable to detect your RAM. 
             Please raise an issue at https://github.com/csgillespie/benchmarkme")
     ram = structure(NA, names="ram")
   } else {
-    
     cleaned_ram = suppressWarnings(try(clean_ram(ram,os), silent=TRUE))
-    
-    if(class(cleaned_ram) == "try-error") {
+    if(class(cleaned_ram) == "try-error" || length(ram) == 0) {
       message("\t Unable to detect your RAM. 
             Please raise an issue at https://github.com/csgillespie/benchmarkme")
       ram = structure(NA, names="ram")
     } else {
-      ram = structure(cleaned_ram, class="bytes", names="ram")
-      
+      ram = structure(cleaned_ram, class = "bytes", names="ram")
     }
   }
   return(ram)
 }
 
-
-#' @S3method  print bytes
+## Not sure why export doesn't work here
+#' @rawNamespace S3method(print,bytes)
 print.bytes = function (x, digits = 3, ...) {
-  power <- min(floor(log(abs(x), 1000)), 4)
+  power = min(floor(log(abs(x), 1000)), 4)
   if (power < 1) {
-    unit <- "B"
+    unit = "B"
   } else {
-    unit <- c("kB", "MB", "GB", "TB")[[power]]
-    x <- x/(1000^power)
+    unit = c("kB", "MB", "GB", "TB")[[power]]
+    x = x/(1000^power)
   }
-  formatted <- format(signif(x, digits = digits), big.mark = ",", 
-                      scientific = FALSE)
+  formatted = format(signif(x, digits = digits), big.mark = ",", 
+                      scientific = FALSE, ...)
   cat(unclass(formatted), " ", unit, "\n", sep = "")
   invisible(paste(unclass(formatted), unit))
 }
