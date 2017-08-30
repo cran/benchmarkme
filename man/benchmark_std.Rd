@@ -4,12 +4,15 @@
 \alias{benchmark_std}
 \title{Run standard benchmarks}
 \usage{
-benchmark_std(runs = 3, verbose = TRUE)
+benchmark_std(runs = 3, verbose = TRUE, parallel = FALSE)
 }
 \arguments{
 \item{runs}{Number of times to run the test. Default 3.}
 
 \item{verbose}{Default TRUE.}
+
+\item{parallel, }{default \code{NULL}. The default is single threaded performance.
+An integer value greater than zero will use multiple cores.}
 }
 \description{
 This function runs a set of standard benchmarks, which should be suitable for most
@@ -21,6 +24,10 @@ machines. It runs a collection of matrix benchmark functions
 }
 To view the list of benchmarks, see \code{get_available_benchmarks}.
 }
+\details{
+Setting \code{cores} equal to 1 is useful for assessing the impact of the 
+parallel computing overhead.
+}
 \examples{
 ## Benchmark your system
 \dontrun{
@@ -30,4 +37,3 @@ res = benchmark_std(3)
 plot(res)
 }
 }
-

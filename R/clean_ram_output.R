@@ -15,23 +15,22 @@ clean_ram = function(ram, os) {
   if(length(grep("^linux", os))) {
     clean_ram = clean_linux_ram(ram)
   } else if(length(grep("^darwin", os))) {
-    clean_ram = clean_darwin_ram(ram)
+    clean_ram = clean_darwin_ram(ram) # nocov
   } else if(length(grep("^solaris", os))) {
-    clean_ram = clean_solaris_ram(ram)
+    clean_ram = clean_solaris_ram(ram) # nocov
   } else {
-    clean_ram = clean_win_ram(ram)
+    clean_ram = clean_win_ram(ram) # nocov
   }
   clean_ram
 }
 
 
 clean_linux_ram = function(ram) {
-  as.numeric(ram)*1000
+  as.numeric(ram)*1024
 }
 
 clean_darwin_ram = function(ram) {
-  ram = remove_white(ram)
-  to_Bytes(unlist(strsplit(ram, " "))[2:3])
+  as.numeric(ram)
 }
 
 clean_solaris_ram = function(ram) {

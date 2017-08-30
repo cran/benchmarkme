@@ -3,12 +3,12 @@ system_ram = function(os) {
     cmd = "awk '/MemTotal/ {print $2}' /proc/meminfo"
     ram = system(cmd, intern=TRUE)
   } else if(length(grep("^darwin", os))) {
-    ram = system('system_profiler -detailLevel mini | grep "  Memory:"', intern=TRUE)[1]
+    ram = substring(system("sysctl hw.memsize", intern = TRUE), 13) #nocov
   } else if(length(grep("^solaris", os))) {
-    cmd = "prtconf | grep Memory"
-    ram = system(cmd, intern=TRUE) ## Memory size: XXX Megabytes
+    cmd = "prtconf | grep Memory" # nocov
+    ram = system(cmd, intern=TRUE) ## Memory size: XXX Megabytes # nocov
   } else {
-    ram = system("wmic MemoryChip get Capacity", intern=TRUE)[-1]
+    ram = system("wmic MemoryChip get Capacity", intern=TRUE)[-1] # nocov
   }
   ram
 }
@@ -33,15 +33,15 @@ get_ram = function() {
   os = R.version$os
   ram = suppressWarnings(try(system_ram(os), silent = TRUE))
   if(class(ram) == "try-error" || length(ram) == 0) {
-    message("\t Unable to detect your RAM. 
-            Please raise an issue at https://github.com/csgillespie/benchmarkme")
-    ram = structure(NA, names="ram")
+    message("\t Unable to detect your RAM. # nocov
+            Please raise an issue at https://github.com/csgillespie/benchmarkme") # nocov
+    ram = structure(NA, names="ram") # nocov
   } else {
     cleaned_ram = suppressWarnings(try(clean_ram(ram,os), silent=TRUE))
     if(class(cleaned_ram) == "try-error" || length(ram) == 0) {
-      message("\t Unable to detect your RAM. 
-            Please raise an issue at https://github.com/csgillespie/benchmarkme")
-      ram = structure(NA, names="ram")
+      message("\t Unable to detect your RAM. # nocov 
+            Please raise an issue at https://github.com/csgillespie/benchmarkme") # nocov
+      ram = structure(NA, names="ram") #nocov
     } else {
       ram = structure(cleaned_ram, class = "bytes", names="ram")
     }
@@ -51,16 +51,23 @@ get_ram = function() {
 
 ## Not sure why export doesn't work here
 #' @rawNamespace S3method(print,bytes)
-print.bytes = function (x, digits = 3, ...) {
-  power = min(floor(log(abs(x), 1000)), 4)
+print.bytes = function (x, digits = 3, unit_system = c("metric", "iec"), ...) {
+  unit_system = match.arg(unit_system)
+  base = switch(unit_system, metric = 1000, iec = 1024)
+  power = min(floor(log(abs(x), base)), 8)
   if (power < 1) {
     unit = "B"
   } else {
-    unit = c("kB", "MB", "GB", "TB")[[power]]
-    x = x/(1000^power)
+    unit_labels = switch(
+      unit_system,
+      metric = c("kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"),
+      iec = c("KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB")
+    )
+    unit = unit_labels[[power]]
+    x = x/(base^power)
   }
   formatted = format(signif(x, digits = digits), big.mark = ",", 
-                      scientific = FALSE, ...)
+    scientific = FALSE, ...)
   cat(unclass(formatted), " ", unit, "\n", sep = "")
   invisible(paste(unclass(formatted), unit))
 }

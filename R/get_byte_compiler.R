@@ -29,13 +29,16 @@ get_byte_compiler = function() {
   
   ## Try to detect enableJIT
   ## Return to same state as we found it
-  if(comp == 0L) {
-    comp = compiler::enableJIT(3)
-    compiler::enableJIT(comp)
-  }
+  ## This shouldn't affect benchmark tests. So remove.
+  #if(comp == 0L) {
+  #  comp = compiler::enableJIT(3)
+  #  compiler::enableJIT(comp)
+  #}
   
   if(comp == 0L){
-    out = capture.output(benchmark_std)
+    # Get function definition
+    # Check if cmpfun has been used
+    out = capture.output(get("benchmark_std", envir = globalenv()))
     is_byte = out[length(out)-1]
     if(length(grep("bytecode: ", is_byte)) > 0) {
       comp = compiler::getCompilerOption("optimize")

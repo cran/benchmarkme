@@ -2,11 +2,11 @@
 #' store the results (in an .rds file). If \code{NULL}, results are not saved.
 #' @rdname upload_results
 #' @export
-create_bundle = function(results, filename = NULL, args = NULL) {
+create_bundle = function(results, filename = NULL, args = NULL, id_prefix = "") {
   if(is.null(args)) args = list()
   message("Getting system specs. This can take a while on Macs")
   type = do.call(get_sys_details, args)  
-  
+  type$id = paste0(id_prefix, type$id)
   type$results = results
   
   if(!is.null(filename)) {
@@ -25,6 +25,8 @@ create_bundle = function(results, filename = NULL, args = NULL) {
 #' @param url The location of where to upload the results.
 #' @param args Default \code{NULL}. A list of arguments to 
 #' be passed to \code{get_sys_details()}. 
+#' @param id_prefix Character string to prefix the benchmark id. Makes it
+#' easier to retrieve past results.
 #' @export
 #' @importFrom httr POST upload_file
 #' @examples
@@ -35,16 +37,20 @@ create_bundle = function(results, filename = NULL, args = NULL) {
 #' }
 upload_results = function(results, 
                           url = "http://www.mas.ncl.ac.uk/~ncsg3/form.php",
-                          args = NULL) {
+                          args = NULL, 
+                          id_prefix = "") {
   message("Creating temporary file")
   fname = tempfile(fileext = ".rds")
-  type = create_bundle(results, fname)
+  on.exit(unlink(fname))
+  
+  type = create_bundle(results, fname, id_prefix = id_prefix)
   
   message("Uploading results")
   r = httr::POST(url, 
            body = list(userFile = httr::upload_file(fname)),
            encode = "multipart")
-  unlink(fname)        
+         
+
   message("Upload complete")
   message("Tracking id: ", type$id)
   type$id
