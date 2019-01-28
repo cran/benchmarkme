@@ -13,9 +13,6 @@
 ## ----eval=FALSE----------------------------------------------------------
 #  plot(res)
 
-## ---- eval=FALSE---------------------------------------------------------
-#  create_bundle(res, filename = "results.rds")
-
 ## ----eval=FALSE----------------------------------------------------------
 #  res_io = benchmark_std(runs = 3)
 #  upload_results(res_io)
@@ -30,9 +27,15 @@
 ## ----eval=FALSE----------------------------------------------------------
 #  res_io = benchmark_io(tmpdir = "some_other_directory")
 
+## ----eval=FALSE----------------------------------------------------------
+#  res_io = benchmark_std(runs = 3, cores = 4)
+
 ## ------------------------------------------------------------------------
 data(past_results, package = "benchmarkmeData")
 
+## ------------------------------------------------------------------------
+data(past_results_v2, package = "benchmarkmeData")
+
 ## ----eval=FALSE----------------------------------------------------------
-#  upload_results(res, args = list(sys_info=FALSE))
+#  upload_results(res, args = list(sys_info = FALSE))
 

@@ -1,36 +1,48 @@
+#' @importFrom benchmarkmeData is_blas_optimize
+#' @export
+benchmarkmeData::is_blas_optimize
+
 #' Benchmark rankings
 #' 
 #' Comparison with past results.
 #' @inheritParams upload_results
 #' @inheritParams benchmark_std
 #' @inheritParams plot.ben_results
+#' @importFrom tibble tibble
+#' @import dplyr
 #' @export
-rank_results = function(results, 
-                        test_group=unique(results$test_group), 
-                        byte_optimize=get_byte_compiler(), 
-                        verbose=TRUE) {
-  tmp_env = new.env()
-  data(past_results, package="benchmarkmeData", envir = tmp_env)
-  pas_res = tmp_env$past_results
-  pas_res = pas_res[order(pas_res$time), ]
-  if(!is.null(byte_optimize)) {
-    if(get_byte_compiler() > 0.5)
-      pas_res = pas_res[pas_res$byte_optimize > 0.5,]
-    else 
-      pas_res = pas_res[pas_res$byte_optimize < 0.5,]
-  }
-  pas_res = pas_res[pas_res$test_group %in% test_group,]
-  pas_res = aggregate(time ~ id + byte_optimize + cpu + date + sysname, 
-                      data=pas_res, 
-                      FUN=function(i) ifelse(length(i) == length(test_group), sum(i), NA))
-  pas_res = pas_res[!is.na(pas_res$time), ]
-  pas_res = pas_res[order(pas_res$time), ]
+rank_results = function(results,
+                        blas_optimize = is_blas_optimize(results), 
+                        verbose = TRUE) {
   
-  no_of_reps = length(results$test)/length(unique(results$test))
-  ben_sum = sum(results[,3])/no_of_reps
-  ben_rank = which(ben_sum < pas_res$time)[1]
-  if(is.na(ben_rank)) ben_rank = nrow(pas_res) + 1
-  if(verbose)
-    message("You are ranked ", ben_rank, " out of ", nrow(results), " machines.")
+  
+  no_of_test_groups =  length(unique(results$test_group))
+  if (no_of_test_groups != 1) 
+    stop("Can only rank a single group at a time", call. = FALSE)
+  
+  no_of_reps = length(results$test) / length(unique(results$test))
+  results_tib = tibble(time = sum(results$elapsed) / no_of_reps, 
+                               is_past = FALSE)
+    
+  if (is.null(blas_optimize)) blas_optimize = c(FALSE, TRUE)
+  tmp_env = new.env()
+  data(past_results_v2, package = "benchmarkmeData", envir = tmp_env)
+  pst = tmp_env$past_results_v2
+  pst$test_group = as.character(pst$test_group)
+  
+  rankings = pst %>%
+    filter(test_group == unique(results$test_group)) %>%
+    filter(blas_optimize %in% !!blas_optimize) %>%
+    filter(cores %in% results$cores) %>%
+    filter(!is.na(time)) %>%
+    mutate(is_past = TRUE) %>%
+    select(time, is_past) %>%
+    bind_rows(results_tib) %>%
+    arrange(time)
+
+  ben_rank = which(!rankings$is_past)
+  
+  if (verbose)
+    message("You are ranked ", ben_rank, " out of ", nrow(rankings), " machines.")
   ben_rank
 }

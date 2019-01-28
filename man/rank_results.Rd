@@ -4,18 +4,16 @@
 \alias{rank_results}
 \title{Benchmark rankings}
 \usage{
-rank_results(results, test_group = unique(results$test_group),
-  byte_optimize = get_byte_compiler(), verbose = TRUE)
+rank_results(results, blas_optimize = is_blas_optimize(results),
+  verbose = TRUE)
 }
 \arguments{
 \item{results}{Benchmark results. Probably obtained from 
 \code{benchmark_std()} or \code{benchmark_io()}.}
 
-\item{test_group}{Default \code{unique(x$test_group)}. 
-The default behaviour is select the groups from your benchmark results.}
-
-\item{byte_optimize}{The default behaviour is to compare your results with results that use the same 
-byte_optimized setting. To use all results, set to \code{NULL}.}
+\item{blas_optimize}{Logical. Default The default behaviour 
+is to compare your results with results that use the same 
+blas_optimize setting. To use all results, set to \code{NULL}.}
 
 \item{verbose}{Default TRUE.}
 }

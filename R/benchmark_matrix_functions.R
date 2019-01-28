@@ -17,7 +17,7 @@
 bm_matrix_fun_fft = function(runs=3, verbose=TRUE) {
   b = 0
   timings = data.frame(user = numeric(runs), system=0, elapsed=0, 
-                       test="fft", test_group="matrix_fun")
+                       test="fft", test_group="matrix_fun", stringsAsFactors = FALSE)
   for (i in 1:runs) {
     a = Rnorm(2500000)
     invisible(gc())
@@ -34,14 +34,14 @@ bm_matrix_fun_fft = function(runs=3, verbose=TRUE) {
 bm_matrix_fun_eigen = function(runs=3, verbose=TRUE) {
   b = 0
   timings = data.frame(user = numeric(runs), system=0, elapsed=0, 
-                       test="eigen", test_group="matrix_fun")
+                       test="eigen", test_group="matrix_fun", stringsAsFactors = FALSE)
   for (i in 1:runs) {
     a = array(Rnorm(600*600), dim = c(600, 600))
     invisible(gc())
     timings[i,1:3] = system.time({ b <- eigen(a, symmetric=FALSE, only.values=TRUE)$Value})[1:3]
   }
   if(verbose)
-    message(c("\tEigenvalues of a 640x640 random matrix", timings_mean(timings)))
+    message(c("\tEigenvalues of a 640 x 640 random matrix", timings_mean(timings)))
   timings
 }
 
@@ -50,14 +50,14 @@ bm_matrix_fun_eigen = function(runs=3, verbose=TRUE) {
 bm_matrix_fun_determinant = function(runs=3, verbose=TRUE) {
   b = 0
   timings = data.frame(user = numeric(runs), system=0, elapsed=0, 
-                       test="determinant", test_group="matrix_fun")
+                       test="determinant", test_group="matrix_fun", stringsAsFactors = FALSE)
   for (i in 1:runs) {
     a = Rnorm(2500*2500); dim(a) = c(2500, 2500)
     invisible(gc())
     timings[i,1:3] = system.time({b <- det(a)})[1:3]
   }
   if(verbose)
-    message(c("\tDeterminant of a 2500x2500 random matrix", timings_mean(timings)))
+    message(c("\tDeterminant of a 2,500 x 2,500 random matrix", timings_mean(timings)))
   timings
 }
 
@@ -67,7 +67,7 @@ bm_matrix_fun_determinant = function(runs=3, verbose=TRUE) {
 #' @export
 bm_matrix_fun_cholesky = function(runs=3, verbose=TRUE) {
   timings = data.frame(user = numeric(runs), system=0, elapsed=0, 
-                       test="cholesky", test_group="matrix_fun")
+                       test="cholesky", test_group="matrix_fun", stringsAsFactors = FALSE)
   for (i in 1:runs) {
     a = crossprod(new("dgeMatrix", x = Rnorm(3000*3000),
                        Dim = as.integer(c(3000, 3000))))
@@ -75,7 +75,7 @@ bm_matrix_fun_cholesky = function(runs=3, verbose=TRUE) {
     timings[i,1:3] = system.time({b <- chol(a)})[1:3]
   }
   if(verbose)
-    message(c("\tCholesky decomposition of a 3000x3000 matrix", timings_mean(timings)))
+    message(c("\tCholesky decomposition of a 3,000 x 3,000 matrix", timings_mean(timings)))
   timings
 }
 
@@ -84,13 +84,13 @@ bm_matrix_fun_cholesky = function(runs=3, verbose=TRUE) {
 bm_matrix_fun_inverse = function(runs=3, verbose=TRUE) {
   b = 0
   timings = data.frame(user = numeric(runs), system=0, elapsed=0, 
-                       test="inverse", test_group="matrix_fun")
+                       test="inverse", test_group="matrix_fun", stringsAsFactors = FALSE)
   for (i in 1:runs) {
     a = new("dgeMatrix", x = Rnorm(1600*1600), Dim = as.integer(c(1600, 1600)))
     invisible(gc())
     timings[i,1:3] = system.time({b <- solve(a)})[1:3]
   }
   if(verbose)
-    message(c("\tInverse of a 1600x1600 random matrix", timings_mean(timings)))
+    message(c("\tInverse of a 1,600 x 1,600 random matrix", timings_mean(timings)))
   timings
 }

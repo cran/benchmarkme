@@ -2,16 +2,12 @@
 % Please edit documentation in R/get_linear_algebra.R
 \name{get_linear_algebra}
 \alias{get_linear_algebra}
-\title{Get BLAS and LAPACK libraries}
+\title{Get BLAS and LAPACK libraries
+Extract the the blas/lapack from \code{sessionInfo()}}
 \usage{
 get_linear_algebra()
 }
 \description{
-This currently only works under Linux and Apple OS. For other OS, e.g. Windows \code{NA}'s 
-are returned.
-}
-\details{
-Calls `Sys.getpid()` and greps blas/lapack. Under Linux a warning is raised
-"lsof: WARNING: can't stat() tracefs file system /sys/kernel/debug/tracing Output information may be incomplete."
-There seems to be no way to avoid this http://askubuntu.com/q/748498/1986
+Get BLAS and LAPACK libraries
+Extract the the blas/lapack from \code{sessionInfo()}
 }
