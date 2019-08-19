@@ -14,6 +14,10 @@ heavily based on the benchmarks at
 <http://r.research.att.com/benchmarks/R-benchmark-25.R>, for assessing
 the speed of your system.
 
+The package is for R 3.5 and above. In previous versions R, detecting
+the effect of the byte compiler was tricky and produced unrealistic
+comparisons.
+
 ## Overview
 
 A straightforward way of speeding up your analysis is to buy a better
@@ -125,6 +129,7 @@ four cores
 
 ``` r
 res_io = benchmark_std(runs = 3, cores = 4)
+plot(res_io)
 ```
 
 ## Previous versions of the package

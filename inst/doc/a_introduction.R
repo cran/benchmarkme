@@ -14,7 +14,7 @@
 #  plot(res)
 
 ## ----eval=FALSE----------------------------------------------------------
-#  res_io = benchmark_std(runs = 3)
+#  res_io = benchmark_io(runs = 3)
 #  upload_results(res_io)
 #  plot(res_io)
 

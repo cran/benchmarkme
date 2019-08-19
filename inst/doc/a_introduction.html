@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -95,7 +96,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -290,6 +291,9 @@ code > span.al { color: #ff0000; font-weight: bold; }
 code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
 </style>
 
+
+
+
 </head>
 
 <body>
@@ -298,7 +302,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 
 <h1 class="title toc-ignore">Crowd sourced benchmarks</h1>
-<h4 class="author"><em>Colin Gillespie</em></h4>
+<h4 class="author">Colin Gillespie</h4>
 
 
 
@@ -341,7 +345,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div id="the-benchmark_io-function" class="section level3">
 <h3>The benchmark_io() function</h3>
 <p>This function benchmarks reading and writing a 5MB or 50MB (if you have less than 4GB of RAM, reduce the number of <code>runs</code> to 1). Run the benchmark using</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">res_io =<span class="st"> </span><span class="kw">benchmark_std</span>(<span class="dt">runs =</span> <span class="dv">3</span>)</a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">res_io =<span class="st"> </span><span class="kw">benchmark_io</span>(<span class="dt">runs =</span> <span class="dv">3</span>)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">upload_results</span>(res_io)</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw">plot</span>(res_io)</a></code></pre></div>
 <p>By default the files are written to a temporary directory generated</p>
@@ -355,6 +359,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <h3>Parallel benchmarks</h3>
 <p>The benchmark functions above have a parallel option - just simply specify the number of cores you want to test. For example to test using four cores</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">res_io =<span class="st"> </span><span class="kw">benchmark_std</span>(<span class="dt">runs =</span> <span class="dv">3</span>, <span class="dt">cores =</span> <span class="dv">4</span>)</a></code></pre></div>
+<p>The process for the parallel benchmarks of the pseudo function <code>benchmark_x(cores = n)</code> is: - initialise the parallel environment - Start timer - Run job x in core 1, 2, …, n simultaneously - when <strong>all</strong> jobs finish stop timer - stop parallel environment This procedure is repeat <code>runs</code> times.</p>
 </div>
 </div>
 <div id="previous-versions-of-this" class="section level2">
@@ -411,6 +416,9 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 </div>
 </div>
 
+
+
+<!-- code folding -->
 
 
 <!-- dynamically load mathjax for compatibility with self-contained -->

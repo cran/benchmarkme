@@ -1,6 +1,6 @@
-2f49a61bc70df6d8c58dea772bc14543 *DESCRIPTION
+a145d772708dcbde512788f0fc71e78b *DESCRIPTION
 ac849aeca0bfc615d6b7a84f20636c5d *NAMESPACE
-884ea1ffe234c432d8ebf09aa368c3c3 *NEWS.md
+0962971c2f04f3ae0954d8b3ddbac6d8 *NEWS.md
 3e924158c81f8ce7b86f543ca88f0367 *R/Rnorm.R
 54387a074bba6fb77fb26c092734fa5d *R/benchmark_io.R
 37c1f1a916347e67169a5110099fed00 *R/benchmark_matrix_calculations.R
@@ -13,7 +13,7 @@ a24d851a72c53958e51e304e4667253f *R/benchmarkme-package.R
 1d6fe1ec6597e06842b9bcb307353fd6 *R/clean_ram_output.R
 0c4546be542af58b995b5c627e062578 *R/data_help_files.R
 bc4e7a50cde35d16758277c6376ec5b2 *R/datatable.R
-9ba0d2b8ad4a2d37d112a2044bc729ec *R/get_byte_compiler.R
+bbd1ae60dd8b3c3bf6a6fcdae7c2db54 *R/get_byte_compiler.R
 dd1d0c12de5196067ad03eea6310a104 *R/get_cpu.R
 a997954fd96fed13bc47870c64c30208 *R/get_hard_disk.R
 6a3627925035c4bc4196104699d45e1e *R/get_linear_algebra.R
@@ -27,12 +27,12 @@ d5e4e16173fb00c7e5b8f8bc7141886d *R/plot_results.R
 ebe1f02ea4ad9c4aebec3e2b641eb036 *R/timing_mean.R
 a7783df1c6c229c71f468bf15e104cae *R/upload_results.R
 7ac8bdd2020836e6a868aa1ba7272978 *R/zzz.r
-8298be47e912c78509d2eed43167de32 *README.md
-03830047d85aebad12a39f60f3abda89 *build/vignette.rds
+ddc8c8102b6d52550b2db804365b2bfa *README.md
+bfb8a38e560cbb45f821adc96d01d6fe *build/vignette.rds
 915beab838a2334b12e3fd312c928208 *data/sample_results.RData
-3fb6bf19f93709e8caa6180cd2fe7488 *inst/doc/a_introduction.R
-0d0d657ff9e662d30722e2dbac54f001 *inst/doc/a_introduction.Rmd
-20aa0de5a739391e8c94f4d91e17bed0 *inst/doc/a_introduction.html
+a63e58981e3d903dbf9963e5a667e9e8 *inst/doc/a_introduction.R
+ffdde656cd1a24ec2d30d7602f2ea9b8 *inst/doc/a_introduction.Rmd
+bab3c60d2735905a76a878833de83905 *inst/doc/a_introduction.html
 a0c45799c0fce1726deea706a2b31c2c *man/benchmark_io.Rd
 31f5a68e76b17babff135e55df7cc3f4 *man/benchmark_std.Rd
 57aba05bc30deaa366cf84d60dc6d249 *man/benchmarkme-package.Rd
@@ -68,4 +68,4 @@ c26972c7ce0b6137424245f8ac3551f9 *tests/testthat/test-ram.R
 49097ac887c40459ac54ccab51560712 *tests/testthat/test-sys_details.R
 3e269e4d81dff73e378abfb84e0c25e1 *tests/testthat/test-timings.R
 9357ab8ee60231fe58f0838c13c70d41 *tests/testthat/test-upload_results.R
-0d0d657ff9e662d30722e2dbac54f001 *vignettes/a_introduction.Rmd
+ffdde656cd1a24ec2d30d7602f2ea9b8 *vignettes/a_introduction.Rmd
