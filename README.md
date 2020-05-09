@@ -6,8 +6,8 @@
 [![Build
 Status](https://travis-ci.org/csgillespie/benchmarkme.svg?branch=master)](https://travis-ci.org/csgillespie/benchmarkme)
 [![codecov.io](https://codecov.io/github/csgillespie/benchmarkme/coverage.svg?branch=master)](https://codecov.io/github/csgillespie/benchmarkme?branch=master)
-[![Downloads](http://cranlogs.r-pkg.org/badges/benchmarkme?color=brightgreen)](https://cran.r-project.org/package=benchmarkme)
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/benchmarkme)](https://cran.r-project.org/package=benchmarkme)
+[![Downloads](https://cranlogs.r-pkg.org/badges/benchmarkme?color=brightgreen)](https://cran.r-project.org/package=benchmarkme)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/benchmarkme)](https://cran.r-project.org/package=benchmarkme)
 
 R benchmarking made easy. The package contains a number of benchmarks,
 heavily based on the benchmarks at
@@ -25,8 +25,7 @@ computer. Modern desktops are relatively cheap, especially compared to
 user time. However, it isn’t clear if upgrading your computing is worth
 the cost. The **benchmarkme** package provides a set of benchmarks to
 help quantify your system. More importantly, it allows you to compare
-your timings with *other*
-systems.
+your timings with *other* systems.
 
 <!-- You can view past benchmarks via the [Shiny](https://jumpingrivers.shinyapps.io/benchmarkme/) interface. -->
 
@@ -53,7 +52,7 @@ This benchmarks numerical operations such as loops and matrix
 operations. This benchmark comprises of three separate benchmarks:
 `prog`, `matrix_fun`, and `matrix_cal`. If you have less than 3GB of RAM
 (run `get_ram()` to find out how much is available on your system), then
-you should kill any memory hungry applications, e.g. firefox, and set
+you should kill any memory hungry applications, e.g. firefox, and set
 `runs = 1` as an argument.
 
 To benchmark your system, use
@@ -71,8 +70,7 @@ and upload your results
 upload_results(res)
 ```
 
-You can compare your results to other users
-via
+You can compare your results to other users via
 
 ``` r
 plot(res)

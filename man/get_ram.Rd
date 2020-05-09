@@ -7,12 +7,13 @@
 get_ram()
 }
 \description{
-Attempt to extract the amount of RAM on the current machine. This is OS 
+Attempt to extract the amount of RAM on the current machine. This is OS
 specific:
 \itemize{
 \item Linux: \code{proc/meminfo}
 \item Apple: \code{system_profiler -detailLevel mini}
-\item Windows: \code{memory.size()}
+\item Windows: First tries \code{grep MemTotal /proc/meminfo} then falls back to
+\code{wmic MemoryChip get Capacity}
 \item Solaris: \code{prtconf}
 }
 A value of \code{NA} is return if it isn't possible to determine the amount of RAM.
@@ -20,6 +21,8 @@ A value of \code{NA} is return if it isn't possible to determine the amount of R
 \examples{
 ## Return (and pretty print) the amount of RAM
 get_ram()
+## Display using iec units
+print(get_ram(), unit_system = "iec")
 }
 \references{
 The \code{print.bytes} function was taken from the \pkg{pryr} package.

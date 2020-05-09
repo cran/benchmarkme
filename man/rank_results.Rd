@@ -4,15 +4,18 @@
 \alias{rank_results}
 \title{Benchmark rankings}
 \usage{
-rank_results(results, blas_optimize = is_blas_optimize(results),
-  verbose = TRUE)
+rank_results(
+  results,
+  blas_optimize = is_blas_optimize(results),
+  verbose = TRUE
+)
 }
 \arguments{
-\item{results}{Benchmark results. Probably obtained from 
+\item{results}{Benchmark results. Probably obtained from
 \code{benchmark_std()} or \code{benchmark_io()}.}
 
-\item{blas_optimize}{Logical. Default The default behaviour 
-is to compare your results with results that use the same 
+\item{blas_optimize}{Logical. Default The default behaviour
+is to compare your results with results that use the same
 blas_optimize setting. To use all results, set to \code{NULL}.}
 
 \item{verbose}{Default TRUE.}

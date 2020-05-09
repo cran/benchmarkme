@@ -4,10 +4,18 @@
 \alias{get_sys_details}
 \title{General system information}
 \usage{
-get_sys_details(sys_info = TRUE, platform_info = TRUE,
-  r_version = TRUE, ram = TRUE, cpu = TRUE, byte_compiler = TRUE,
-  linear_algebra = TRUE, locale = TRUE, installed_packages = TRUE,
-  machine = TRUE)
+get_sys_details(
+  sys_info = TRUE,
+  platform_info = TRUE,
+  r_version = TRUE,
+  ram = TRUE,
+  cpu = TRUE,
+  byte_compiler = TRUE,
+  linear_algebra = TRUE,
+  locale = TRUE,
+  installed_packages = TRUE,
+  machine = TRUE
+)
 }
 \arguments{
 \item{sys_info}{Default \code{TRUE}.}
@@ -34,10 +42,10 @@ get_sys_details(sys_info = TRUE, platform_info = TRUE,
 A list
 }
 \description{
-The \code{get_sys_info} returns general system level information as a list. The 
+The \code{get_sys_info} returns general system level information as a list. The
 function parameters control the information to upload. If a parameter is set to
 \code{FALSE}, an \code{NA} is uploaded instead. Each element of the list
-is contains the output from: 
+is contains the output from:
 \itemize{
 \item \code{Sys.info()};
 \item \code{get_platform_info()};

@@ -6,19 +6,22 @@
 \alias{bm_write}
 \title{IO benchmarks}
 \usage{
-benchmark_io(runs = 3, size = c(5, 50), tmpdir = tempdir(),
-  verbose = TRUE, cores = 0L)
+benchmark_io(
+  runs = 3,
+  size = c(5, 50),
+  tmpdir = tempdir(),
+  verbose = TRUE,
+  cores = 0L
+)
 
-bm_read(runs = 3, size = c(5, 50), tmpdir = tempdir(),
-  verbose = TRUE)
+bm_read(runs = 3, size = c(5, 50), tmpdir = tempdir(), verbose = TRUE)
 
-bm_write(runs = 3, size = c(5, 50), tmpdir = tempdir(),
-  verbose = TRUE)
+bm_write(runs = 3, size = c(5, 50), tmpdir = tempdir(), verbose = TRUE)
 }
 \arguments{
 \item{runs}{Number of times to run the test. Default 3.}
 
-\item{size}{a number specifying the approximate size of the generated csv. 
+\item{size}{a number specifying the approximate size of the generated csv.
 Must be one of 5 or 50}
 
 \item{tmpdir}{a non-empty character vector giving the directory name. Default \code{tempdir()}}
@@ -29,7 +32,7 @@ Must be one of 5 or 50}
 }
 \description{
 Benchmarking reading and writing a csv file (containing random numbers).
-The tests are essentially \code{write.csv(x)} and \code{read.csv(...)} where \code{x} 
+The tests are essentially \code{write.csv(x)} and \code{read.csv(...)} where \code{x}
 is a data frame.
 Of \code{size}MB.
 }
