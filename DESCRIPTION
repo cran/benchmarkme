@@ -1,7 +1,7 @@
 Type: Package
 Package: benchmarkme
 Title: Crowd Sourced System Benchmarks
-Version: 1.0.4
+Version: 1.0.5
 Authors@R: 
     person(given = "Colin",
            family = "Gillespie",
@@ -23,9 +23,9 @@ Suggests: covr, DT, ggplot2, knitr, RcppZiggurat, rmarkdown, testthat
 VignetteBuilder: knitr
 Encoding: UTF-8
 LazyData: TRUE
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 NeedsCompilation: no
-Packaged: 2020-05-09 21:07:40 UTC; ncsg3
+Packaged: 2021-02-09 10:08:52 UTC; ncsg3
 Author: Colin Gillespie [aut, cre] (<https://orcid.org/0000-0003-1787-0275>)
 Repository: CRAN
-Date/Publication: 2020-05-09 22:20:02 UTC
+Date/Publication: 2021-02-09 11:20:03 UTC
