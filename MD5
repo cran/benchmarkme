@@ -1,6 +1,6 @@
-c5d6ae92a97bbcc3999f857af3b475d5 *DESCRIPTION
+79e33f0bd8f0391b800b5d289916489f *DESCRIPTION
 d0bdd39a5515b92fab23f351140a1ca3 *NAMESPACE
-6f4d617e0d5d6348d23f499347d9aa22 *NEWS.md
+3aa6ba5e5f0ee826167dd08cb398760f *NEWS.md
 0bf5958c081bbc3208b1e61394241a50 *R/benchmark_io.R
 eb6433b38253e6f12cf4efa4d162f92b *R/benchmark_matrix_calculations.R
 7dd439db2431f7a273e256db144986a5 *R/benchmark_matrix_functions.R
@@ -13,7 +13,7 @@ f7c1b846e3f23dac29203e297c280d5e *R/clean_ram_output.R
 0c4546be542af58b995b5c627e062578 *R/data_help_files.R
 ca6c137996782b702a6d1eb91c27b3c0 *R/datatable.R
 3acdbb3dbc0fe542c7f7a38b47578cc4 *R/get_byte_compiler.R
-46441660e796a0742a2e77a019ebb515 *R/get_cpu.R
+e882885f01f3a357e5165affcebfd7e6 *R/get_cpu.R
 e0c10b94c1764d75b01edd188002f778 *R/get_hard_disk.R
 c3716523a18f6cd756e6fdd6317aa436 *R/get_linear_algebra.R
 d4a29d25c6a5f1c601e2b7aed6b315d2 *R/get_platform_info.R
