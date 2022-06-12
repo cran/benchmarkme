@@ -1,6 +1,6 @@
 get_windows_ram = function() {
   ram = try(system("grep MemTotal /proc/meminfo", intern = TRUE), silent = TRUE)
-  if (class(ram) != "try-error" && length(ram) != 0) {
+  if (!inherits(ram, "try-error") && length(ram) != 0) {
     ram = strsplit(ram, " ")[[1]]
     mult = switch(ram[length(ram)],
                   "B" = 1L,
@@ -29,8 +29,7 @@ system_ram = function(os) {
       ram = substring(ram, 13)
     }
   } else if (length(grep("^solaris", os))) {
-    cmd = "prtconf | grep Memory" # nocov
-    ram = system(cmd, intern = TRUE) ## Memory size: XXX Megabytes # nocov
+    ram = NA
   } else {
     ram = get_windows_ram() # nocov
   }
@@ -59,13 +58,13 @@ system_ram = function(os) {
 get_ram = function() {
   os = R.version$os
   ram = suppressWarnings(try(system_ram(os), silent = TRUE))
-  if (class(ram) == "try-error" || length(ram) == 0 || is.na(ram)) {
+  if (inherits(ram, "try-error") || length(ram) == 0L || is.na(ram)) {
     message("\t Unable to detect your RAM. # nocov
             Please raise an issue at https://github.com/csgillespie/benchmarkme") # nocov
     ram = structure(NA, class = "ram") # nocov
   } else {
     cleaned_ram = suppressWarnings(try(clean_ram(ram, os), silent = TRUE))
-    if (class(cleaned_ram) == "try-error" || length(ram) == 0) {
+    if (inherits(cleaned_ram, "try-error") || length(ram) == 0L) {
       message("\t Unable to detect your RAM. # nocov
             Please raise an issue at https://github.com/csgillespie/benchmarkme") # nocov
       ram = structure(NA, class = "ram") #nocov
@@ -79,7 +78,6 @@ get_ram = function() {
 #' @rawNamespace S3method(print,ram)
 print.ram = function(x, digits = 3, unit_system = c("metric", "iec"), ...) {
   unit_system = match.arg(unit_system)
-  #unit_system = "metric"
   base = switch(unit_system, metric = 1000, iec = 1024)
   power = min(floor(log(abs(x), base)), 8)
   if (is.na(x) || power < 1) {

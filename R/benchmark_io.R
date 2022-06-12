@@ -73,13 +73,13 @@ benchmark_io_parallel = function(runs, size, tmpdir, verbose, cores) {
   results
 }
 
-#bm_io(runs = runs, size = s, tmpdir = tmpdir, verbose = verbose)
 #' @rdname benchmark_io
 #' @export
 bm_read = function(runs = 3, size = c(5, 50),
                   tmpdir = tempdir(), verbose = TRUE) {
   n = 12.5e4 * size
-  set.seed(1);  on.exit(set.seed(NULL))
+  set.seed(1)
+  on.exit(set.seed(NULL))
   x = Rnorm(n)
   m = data.frame(matrix(x, ncol = 10))
   test = rep(paste0("read",  size), runs)
@@ -109,7 +109,8 @@ bm_read = function(runs = 3, size = c(5, 50),
 bm_write = function(runs = 3, size = c(5, 50),
                      tmpdir = tempdir(), verbose = TRUE) {
   n = 12.5e4 * size
-  set.seed(1); on.exit(set.seed(NULL))
+  set.seed(1)
+  on.exit(set.seed(NULL))
   x = Rnorm(n)
   m = data.frame(matrix(x, ncol = 10))
   test = rep(paste0("write",  size), runs)
